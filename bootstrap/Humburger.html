@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body { margin:0; font-family:Arial; }
+
+nav {
+  background:black;
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo { color:white; font-size:20px; }
+
+.menu {
+  display:none;
+  flex-direction:column;
+  background:black;
+  position:absolute;
+  top:50px;
+  left:0;
+  width:100%;
+  text-align:center;
+}
+
+.menu a {
+  color:white;
+  padding:10px;
+  text-decoration:none;
+  display:block;
+}
+
+.menu a:hover { background:gray; }
+
+.hamburger {
+  font-size:26px;
+  color:white;
+  cursor:pointer;
+}
+
+@media(min-width:600px){
+  .menu {
+    display:flex !important;
+    position:static;
+    flex-direction:row;
+    width:auto;
+  }
+  .hamburger { display:none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Logo</div>
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <div class="menu" id="menu">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
+
+<script>
+function toggleMenu() {
+  var menu = document.getElementById("menu");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+
+</body>
+</html>
