@@ -1,5 +1,3 @@
-// App.js
-
 import React from "react";
 import "./App.css";
 
@@ -17,8 +15,7 @@ function Student(props) {
     </div>
   );
 }
-
-// Main App Component
+t
 function App() {
   return (
     <div className="container">

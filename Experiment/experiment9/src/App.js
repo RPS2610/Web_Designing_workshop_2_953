@@ -2,24 +2,19 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  // Form state
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Error state
   const [errors, setErrors] = useState({});
 
-  // Registered users (final list)
   const [registeredUsers, setRegisteredUsers] = useState([]);
 
-  // API users (optional base data)
   const [apiUsers, setApiUsers] = useState([]);
 
-  // Success message
   const [success, setSuccess] = useState("");
 
-  // Fetch API users
+
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => res.json())
