@@ -1,14 +1,16 @@
-const searchInput =
-document.querySelector(".search-input");
 
-const searchButton =
-document.querySelector(".search-icon");
+
+const searchInput =
+document.querySelector('.search-input');
+
+const searchBtn =
+document.querySelector('.search-btn');
 
 const boxes =
-document.querySelectorAll(".box");
+document.querySelectorAll('.box');
 
 
-function searchProducts() {
+function searchProducts(){
 
     let value =
     searchInput.value.toLowerCase();
@@ -16,18 +18,19 @@ function searchProducts() {
     boxes.forEach(function(box){
 
         let title =
-        box.querySelector("h2")
+        box.querySelector('h2')
         .innerText
         .toLowerCase();
 
         if(title.includes(value)){
 
-            box.style.display = "block";
+            box.style.display = 'block';
 
         }
+
         else{
 
-            box.style.display = "none";
+            box.style.display = 'none';
 
         }
 
@@ -35,135 +38,228 @@ function searchProducts() {
 
 }
 
-
-searchButton.addEventListener(
-    "click",
+searchBtn.addEventListener(
+    'click',
     searchProducts
 );
 
 
-searchInput.addEventListener(
-    "keyup",
+/* CART */
+
+const cart =
+document.querySelector('.cart');
+
+const buttons =
+document.querySelectorAll('.box button');
+
+let count = 0;
+
+buttons.forEach(function(button){
+
+    button.addEventListener(
+        'click',
+        function(){
+
+            count++;
+
+            cart.innerHTML =
+            `<i class="fa-solid fa-cart-shopping"></i>
+             Cart (${count})`;
+
+        }
+    );
+
+});
+
+
+/* AI CHAT */
+
+const aiBtn =
+document.querySelector('.ai-btn');
+
+const chatBox =
+document.querySelector('.chat-box');
+
+const closeChat =
+document.querySelector('.close-chat');
+
+const sendBtn =
+document.querySelector('.send-btn');
+
+const chatInput =
+document.querySelector('.chat-input');
+
+const messages =
+document.querySelector('.chat-messages');
+
+
+aiBtn.addEventListener(
+    'click',
+    function(){
+
+        chatBox.style.display = 'flex';
+
+    }
+);
+
+
+closeChat.addEventListener(
+    'click',
+    function(){
+
+        chatBox.style.display = 'none';
+
+    }
+);
+
+
+sendBtn.addEventListener(
+    'click',
+    sendMessage
+);
+
+chatInput.addEventListener(
+    'keypress',
     function(event){
 
-        if(event.key === "Enter"){
+        if(event.key === 'Enter'){
 
-            searchProducts();
+            sendMessage();
 
         }
 
     }
 );
 
-const cart =
-document.querySelector(".cart");
 
-const buttons =
-document.querySelectorAll(".box-content a");
+function sendMessage(){
 
-let cartCount = 0;
+    let text =
+    chatInput.value.trim();
 
-
-buttons.forEach(function(button){
-
-    button.addEventListener(
-        "click",
-        function(){
-
-            cartCount++;
-
-            cart.innerHTML =
-            `<i class="fa-solid fa-cart-shopping"></i>
-            Cart (${cartCount})`;
-
-        }
-    );
-
-});
-
-boxes.forEach(function(box){
-
-    box.addEventListener(
-        "mouseenter",
-        function(){
-
-            box.style.transition =
-            "0.3s";
-
-            box.style.transform =
-            "translateY(-10px)";
-
-            box.style.boxShadow =
-            "0px 8px 20px rgba(0,0,0,0.3)";
-
-        }
-    );
+    if(text === '') return;
 
 
-    box.addEventListener(
-        "mouseleave",
-        function(){
+    let userDiv =
+    document.createElement('div');
 
-            box.style.transform =
-            "translateY(0px)";
+    userDiv.classList.add('user-msg');
 
-            box.style.boxShadow =
-            "none";
+    userDiv.innerText = text;
 
-        }
-    );
-
-});
-
-const images =
-document.querySelectorAll(".bg_img");
+    messages.appendChild(userDiv);
 
 
-images.forEach(function(image){
-
-    image.addEventListener(
-        "mouseenter",
-        function(){
-
-            image.style.transition =
-            "0.4s";
-
-            image.style.transform =
-            "scale(1.05)";
-
-        }
-    );
+    chatInput.value = '';
 
 
-    image.addEventListener(
-        "mouseleave",
-        function(){
+    let botDiv =
+    document.createElement('div');
 
-            image.style.transform =
-            "scale(1)";
+    botDiv.classList.add('bot-msg');
 
-        }
-    );
 
-});
+    let response =
+    getBotReply(text);
+
+
+    setTimeout(function(){
+
+        botDiv.innerText = response;
+
+        messages.appendChild(botDiv);
+
+        messages.scrollTop =
+        messages.scrollHeight;
+
+    },700);
+
+}
+
+
+function getBotReply(message){
+
+    message =
+    message.toLowerCase();
+
+
+    if(message.includes('hello')){
+
+        return '👋 Hello! Welcome to Amazon AI Store';
+
+    }
+
+    else if(message.includes('laptop')){
+
+        return '💻 Best gaming laptops are available in Electronics section';
+
+    }
+
+    else if(message.includes('phone')){
+
+        return '📱 Latest smartphones are trending now';
+
+    }
+
+    else if(message.includes('fashion')){
+
+        return '👕 Trending fashion collection available with discounts';
+
+    }
+
+    else if(message.includes('toys')){
+
+        return '🧸 New AI selected toys are available';
+
+    }
+
+    else if(message.includes('beauty')){
+
+        return '💄 Beauty products are on special sale';
+
+    }
+
+    else if(message.includes('furniture')){
+
+        return '🛋️ Modern furniture available with fast delivery';
+
+    }
+
+    else if(message.includes('cart')){
+
+        return '🛒 Your cart is updated successfully';
+
+    }
+
+    else if(message.includes('thank')){
+
+        return '❤️ Happy to help you';
+
+    }
+
+    else{
+
+        return '🤖 I am AI assistant. Try asking about products like laptops, fashion, toys, beauty or furniture.';
+
+    }
+
+}
+
+
+/* HERO IMAGE SLIDER */
 
 const hero =
-document.querySelector(".hero-sec");
-
+document.querySelector('.hero');
 
 const heroImages = [
 
-"https://i.postimg.cc/ZRV9SbC9/hero-image-3.jpg",
-
-"https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-
-"https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+'https://images.unsplash.com/photo-1523275335684-37898b6baf30',
+'https://images.unsplash.com/photo-1505740420928-5e560c06d30e',
+'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9'
 
 ];
 
-
 let current = 0;
-
 
 setInterval(function(){
 
@@ -180,51 +276,30 @@ setInterval(function(){
 
 },4000);
 
-const backTop =
-document.querySelector(".foot-panel1");
 
-
-backTop.addEventListener(
-    "click",
-    function(){
-
-        window.scrollTo({
-
-            top:0,
-            behavior:"smooth"
-
-        });
-
-    }
-);
+/* DARK MODE */
 
 let darkMode = false;
 
-
-document.addEventListener(
-    "keydown",
+window.addEventListener(
+    'keydown',
     function(event){
 
-        if(event.key === "d"){
+        if(event.key === 'd'){
 
             darkMode = !darkMode;
 
             if(darkMode){
 
-                document.body.style.background =
-                "#111";
-
-                document.body.style.color =
-                "white";
+                document.body.style.background = '#111';
+                document.body.style.color = 'white';
 
             }
+
             else{
 
-                document.body.style.background =
-                "white";
-
-                document.body.style.color =
-                "black";
+                document.body.style.background = '#eaeded';
+                document.body.style.color = 'black';
 
             }
 
@@ -233,108 +308,23 @@ document.addEventListener(
     }
 );
 
-const signIn =
-document.querySelector(".nav-sign-in");
+
+/* BACK TO TOP */
+
+const topBtn =
+document.querySelector('.footer-top');
 
 
-signIn.addEventListener(
-    "click",
+topBtn.addEventListener(
+    'click',
     function(){
 
-        let username =
-        prompt("Enter Your Name");
+        window.scrollTo({
 
-        if(username){
-
-            signIn.innerHTML =
-
-            `<p>
-                <span class="hello">
-                Hello, ${username}
-                </span>
-            </p>
-
-            <p class="list">
-            Account & Lists
-            </p>`;
-
-        }
-
-    }
-);
-
-const navbar =
-document.querySelector(".navbar");
-
-
-window.addEventListener(
-    "scroll",
-    function(){
-
-        if(window.scrollY > 50){
-
-            navbar.style.position =
-            "sticky";
-
-            navbar.style.top = "0";
-
-            navbar.style.zIndex =
-            "1000";
-
-        }
-
-    }
-);
-
-const deals =
-document.querySelector(".deals p");
-
-
-setInterval(function(){
-
-    const now =
-    new Date();
-
-    deals.innerText =
-
-    "🕒 " +
-
-    now.getHours() + ":" +
-
-    now.getMinutes() + ":" +
-
-    now.getSeconds();
-
-},1000);
-
-window.addEventListener(
-    "load",
-    function(){
-
-        boxes.forEach(function(box,index){
-
-            setTimeout(function(){
-
-                box.style.opacity = "1";
-
-                box.style.transform =
-                "translateY(0px)";
-
-            },index * 100);
+            top:0,
+            behavior:'smooth'
 
         });
 
     }
 );
-
-boxes.forEach(function(box){
-
-    box.style.opacity = "0";
-
-    box.style.transform =
-    "translateY(30px)";
-
-    box.style.transition =
-    "0.5s";
-
-});
