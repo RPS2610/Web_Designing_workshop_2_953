@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #ffffff;
+}
+
+.app-container {
+    max-width: 400px;
+}
+
+/* Heading style matching standard web text */
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+/* Row alignment for input box and Add button */
+.input-section {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #e0e0e0;
+}
+
+/* List container item layouts */
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+/* Style for the bullet point dot element */
+.bullet-dot {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    user-select: none; /* Prevents selecting the dot text accidentally */
+}
+
+/* Delete button layout matching your video */
+.delete-btn {
+    padding: 3px 8px;
+    font-size: 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+
+.delete-btn:hover {
+    background-color: #fee;
+    border-color: #f99;
+    color: #c00;
+}

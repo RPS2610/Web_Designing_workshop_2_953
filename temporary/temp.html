@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Armstrong Number Checker</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container{
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h1{
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input{
+            width: 90%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        button{
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover{
+            background: #0056b3;
+        }
+
+        #result{
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Armstrong Number Checker</h1>
+
+        <input type="number" id="number" placeholder="Enter a number">
+
+        <br>
+
+        <button onclick="checkArmstrong()">
+            Check
+        </button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Solver Function Template
+        function solve(...args) {
+            /*
+              args: Problem inputs
+              Return: Final computed result as string
+            */
+
+            const num = Number(args[0]);
+
+            let temp = num;
+            let sum = 0;
+            const digits = num.toString().length;
+
+            while (temp > 0) {
+                let digit = temp % 10;
+                sum += digit ** digits;
+                temp = Math.floor(temp / 10);
+            }
+
+            let result = (sum === num)
+                ? `${num} is an Armstrong Number ✅`
+                : `${num} is NOT an Armstrong Number ❌`;
+
+            return result;
+        }
+
+        // Web App Function
+        function checkArmstrong() {
+            const number = document.getElementById("number").value;
+
+            if(number === ""){
+                document.getElementById("result").innerHTML =
+                    "Please enter a number!";
+                return;
+            }
+
+            const output = solve(number);
+
+            document.getElementById("result").innerHTML = output;
+        }
+    </script>
+
+</body>
+</html>
